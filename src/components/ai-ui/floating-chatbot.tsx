@@ -314,6 +314,9 @@ function MobileChatSheet({
   pageContext: string;
 }) {
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const [dragOffset, setDragOffset] = React.useState(0);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const dragStartY = React.useRef(0);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -337,6 +340,28 @@ function MobileChatSheet({
     };
   }, [isOpen]);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    dragStartY.current = e.touches[0].clientY;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - dragStartY.current;
+    if (diff > 0) {
+      setDragOffset(diff);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    if (dragOffset > 100) {
+      setIsOpen(false);
+    }
+    setDragOffset(0);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -348,6 +373,10 @@ function MobileChatSheet({
 
       <div
         ref={containerRef}
+        style={{
+          transform: dragOffset > 0 ? `translateY(${dragOffset}px)` : undefined,
+          transition: isDragging ? "none" : "transform 0.3s ease-out",
+        }}
         className={cn(
           "fixed inset-x-0 bottom-0 z-[200]",
           "h-[100dvh] pt-[env(safe-area-inset-top)]",
@@ -356,11 +385,13 @@ function MobileChatSheet({
           "animate-in slide-in-from-bottom duration-300"
         )}
       >
-        <div className="flex justify-center pt-3 pb-2 shrink-0">
-          <button 
-            onClick={() => setIsOpen(false)}
-            className="w-12 h-1.5 rounded-full bg-muted-foreground/20 cursor-pointer hover:bg-muted-foreground/30 transition-colors"
-          />
+        <div 
+          className="flex justify-center pt-3 pb-2 shrink-0 cursor-grab active:cursor-grabbing touch-none"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="w-12 h-1.5 rounded-full bg-muted-foreground/20" />
         </div>
 
         <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 shrink-0">
