@@ -3,8 +3,10 @@ import { streamText } from "ai";
 import { nanoid } from "nanoid";
 import { smoothStream } from "ai";
 import { monitorStream } from "@/lib/stream-transformers";
+
 export const runtime = "edge";
 export const maxDuration = 30;
+
 
 const avalAi = createOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -13,6 +15,7 @@ const avalAi = createOpenAI({
 });
 
 export async function POST(req: Request) {
+
   const { messages, pageContent = "" } = await req.json();
 
   const systemMessage = `

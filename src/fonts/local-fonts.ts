@@ -37,3 +37,33 @@ export const IRANYekan = localFont({
   ],
   variable: "--font-iranyekan",
 });
+
+export const Gilroy = localFont({
+  src: [
+    {
+      path: "./gilroy/woff/gilroy-light.woff",
+      weight: "300",
+    },
+    {
+      path: "./gilroy/woff/gilroy-regular.woff",
+      weight: "400",
+    },
+    {
+      path: "./gilroy/woff/gilroy-medium.woff",
+      weight: "500",
+    },
+    {
+      path: "./gilroy/woff/gilroy-semibold.woff",
+      weight: "600",
+    },
+    {
+      path: "./gilroy/woff/gilroy-bold.woff",
+      weight: "700",
+    },
+    {
+      path: "./gilroy/woff/gilroy-extrabold.woff",
+      weight: "800",
+    },
+  ],
+  variable: "--font-gilroy",
+});

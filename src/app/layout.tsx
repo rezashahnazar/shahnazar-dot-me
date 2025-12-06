@@ -1,67 +1,95 @@
 import "./globals.css";
 import { CustomThemeProvider } from "@/components/theme/theme-provider";
-import { IRANYekan } from "@/fonts/local-fonts";
+import { IRANYekan, Gilroy } from "@/fonts/local-fonts";
 import { cn } from "@/lib/utils";
-import { Header } from "@/components/layout/header";
+import { FloatingHeader } from "@/components/layout/floating-header";
+import { Footer } from "@/components/layout/footer";
 import { SkipLink } from "@/components/layout/skip-link";
-import { Logo } from "@/components/brand/logo";
+import { BackgroundEffects } from "@/components/effects/background-effects";
+import { JsonLd } from "@/components/seo/json-ld";
+import { siteConfig } from "@/config/site";
 import type { Viewport } from "next";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "رضا شاه‌نظر | Reza Shahnazar",
-  description:
-    "وبسایت شخصی رضا شاه‌نظر - متخصص قلب و عروق، مدیر Product Marketing دیجی‌کالا و مهندس نرم‌افزار | Personal website of Reza Shahnazar - Cardiologist, Product Marketing Manager at Digikala, and Software Engineer",
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.nameEn}`,
+  },
+  description: `${siteConfig.nameEn} - Cardiologist, MD & Software Engineer. ${siteConfig.about.intro}`,
   authors: [
-    { name: "Reza Shahnazar", url: "https://github.com/rezashahnazar" },
-    { name: "رضا شاه‌نظر", url: "https://github.com/rezashahnazar" },
+    { name: siteConfig.nameEn, url: siteConfig.url },
+    { name: siteConfig.name, url: siteConfig.url },
   ],
-  creator: "Reza Shahnazar",
+  creator: siteConfig.nameEn,
+  publisher: siteConfig.nameEn,
+  category: "Personal Website",
   keywords: [
-    "رضا شاه‌نظر",
+    siteConfig.name,
+    siteConfig.nameEn,
     "Reza Shahnazar",
-    "دیجی‌کالا",
-    "Digikala",
-    "Product Marketing",
-    "پزشک",
-    "متخصص قلب",
+    "رضا شاه‌نظر",
+    "رضا شاه نظر نژاد خالصی",
+    "Reza Shahnazar Nezhad Khalesi",
     "Cardiologist",
+    "متخصص قلب و عروق",
     "Software Engineer",
     "مهندس نرم‌افزار",
-    "پروداکت مارکتینگ",
+    "Data Scientist",
+    "علم داده",
+    "AI Product Development",
+    "هوش مصنوعی",
+    "Tehran Heart Center",
+    "مرکز قلب تهران",
+    "Tehran University of Medical Sciences",
+    "دانشگاه علوم پزشکی تهران",
+    "TUMS",
+    "Digikala",
+    "دیجی‌کالا",
+    "Biology Olympiad",
+    "المپیاد زیست‌شناسی",
+    "Gold Medalist",
+    "مدال طلا",
+    "Cardiovascular Medicine",
+    "Full-Stack Development",
+    "Product Management",
   ],
-  metadataBase: new URL("https://www.shahnazar.me"),
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
-    title: "رضا شاه‌نظر | Reza Shahnazar",
-    description:
-      "وبسایت شخصی رضا شاه‌نظر - متخصص قلب و عروق، مدیر Product Marketing دیجی‌کالا و مهندس نرم‌افزار | Personal website of Reza Shahnazar - Cardiologist, Product Marketing Manager at Digikala, and Software Engineer",
-    type: "website",
-    url: "https://www.shahnazar.me",
-    siteName: "رضا شاه‌نظر | Reza Shahnazar",
+    title: `${siteConfig.nameEn} - Cardiologist, MD & Software Engineer`,
+    description: `${siteConfig.nameEn} is a cardiologist and software engineer focused on building data-driven and AI-enabled solutions for healthcare and large-scale digital platforms.`,
+    type: "profile",
+    url: siteConfig.url,
+    siteName: siteConfig.nameEn,
     locale: "fa_IR",
     alternateLocale: "en_US",
+    firstName: "Reza",
+    lastName: "Shahnazar",
     images: [
       {
-        url: "https://www.shahnazar.me/opengraph-image",
+        url: `${siteConfig.url}/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: "رضا شاه‌نظر | Reza Shahnazar",
+        alt: `${siteConfig.nameEn} - Cardiologist & Software Engineer`,
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "رضا شاه‌نظر | Reza Shahnazar",
-    description:
-      "وبسایت شخصی رضا شاه‌نظر - متخصص قلب و عروق، مدیر Product Marketing دیجی‌کالا و مهندس نرم‌افزار | Personal website of Reza Shahnazar",
-    images: ["https://www.shahnazar.me/opengraph-image"],
+    title: `${siteConfig.nameEn} - Cardiologist, MD & Software Engineer`,
+    description: `Cardiologist and software engineer focused on AI-enabled solutions for healthcare and digital platforms.`,
+    images: [`${siteConfig.url}/opengraph-image`],
+    creator: "@rezashahnazar",
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
@@ -71,20 +99,25 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   alternates: {
-    canonical: "https://www.shahnazar.me",
+    canonical: siteConfig.url,
+    languages: {
+      "fa-IR": siteConfig.url,
+      "en-US": siteConfig.url,
+    },
+  },
+  other: {
+    "google-site-verification": process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "hsl(var(--background))",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+  ],
   colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  minimumScale: 1,
-  userScalable: false,
-  height: "device-height",
-  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -94,27 +127,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa-IR" dir="rtl" suppressHydrationWarning>
+      <head>
+        <JsonLd />
+      </head>
       <body
         className={cn(
           IRANYekan.className,
-          "antialiased bg-background text-foreground"
+          Gilroy.variable,
+          "min-h-screen flex flex-col antialiased"
         )}
       >
         <CustomThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
+          disableTransitionOnChange={false}
         >
-          <SkipLink href="#main-content">رفتن به محتوای اصلی</SkipLink>
-          <Header
-            title="وبسایت شخصی رضا شاه‌نظر"
-            logo={<Logo className="h-8 w-8" />}
-            className="h-[48px] md:h-[64px]"
+          <BackgroundEffects
+            mask={siteConfig.effects.mask}
+            gradient={siteConfig.effects.gradient}
+            dots={siteConfig.effects.dots}
+            grid={siteConfig.effects.grid}
+            lines={siteConfig.effects.lines}
+            noise={siteConfig.effects.noise}
           />
-          <main id="main-content" className="w-full mx-auto">
+          <SkipLink href="#main-content">رفتن به محتوای اصلی</SkipLink>
+          <FloatingHeader />
+          <main id="main-content" className="flex-1 w-full pt-20">
             {children}
           </main>
+          <Footer />
         </CustomThemeProvider>
       </body>
     </html>
