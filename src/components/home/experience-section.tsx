@@ -25,7 +25,8 @@ export function ExperienceSection() {
           staggerDelay={0.08}
         >
           {/* Timeline line - desktop */}
-          <div className="absolute right-[7px] md:right-[200px] lg:right-[216px] top-2 bottom-2 w-px bg-gradient-to-b from-border via-border/50 to-transparent hidden md:block" />
+          {/* Position: padding(10px) + period(md:176px/lg:192px) + gap(md:24px/lg:32px) + half-dot(6px) */}
+          <div className="absolute right-[7px] md:right-[216px] lg:right-[240px] top-2 bottom-2 w-px bg-gradient-to-b from-border via-border/50 to-transparent hidden md:block" />
 
           {siteConfig.experiences.map((experience, index) => (
             <StaggerItem key={`${experience.company}-${index}`}>
@@ -105,7 +106,7 @@ export function ExperienceSection() {
                 
                 {/* Divider between items */}
                 {index < siteConfig.experiences.length - 1 && (
-                  <div className="mt-6 sm:mt-8 md:mr-[196px] lg:mr-[212px] border-b border-border/20" />
+                  <div className="mt-6 sm:mt-8 md:mr-[210px] lg:mr-[234px] border-b border-border/20" />
                 )}
               </div>
             </StaggerItem>
