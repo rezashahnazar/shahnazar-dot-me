@@ -88,7 +88,7 @@ function ChatTextarea({
       enterKeyHint="enter"
       className={cn(
         "flex-1 bg-transparent min-h-[24px] max-h-[100px] sm:max-h-[120px]",
-        "text-[13px] leading-[20px]",
+        "text-[16px] sm:text-[14px] leading-[22px] sm:leading-[20px]",
         "text-foreground placeholder:text-muted-foreground/60",
         "border-0 px-1 py-0.5 resize-none",
         "focus-visible:ring-0 focus-visible:ring-offset-0 !shadow-none",
