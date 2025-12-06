@@ -193,7 +193,7 @@ function DesktopChatPanel({
         <MessageList className="flex-1" />
         <ChatInput 
           disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشند."
-          className="border-t border-border/50"
+          className=""
         />
       </AiChatProvider>
     </div>
