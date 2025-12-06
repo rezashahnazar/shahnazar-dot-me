@@ -52,8 +52,8 @@ export function BackgroundEffects({
   noise = { display: true, opacity: 3 },
 }: BackgroundEffectsProps) {
   const maskStyle = {
-    maskImage: `radial-gradient(ellipse ${mask.radius}% ${mask.radius}% at ${mask.x}% ${mask.y}%, black, transparent)`,
-    WebkitMaskImage: `radial-gradient(ellipse ${mask.radius}% ${mask.radius}% at ${mask.x}% ${mask.y}%, black, transparent)`,
+    maskImage: `radial-gradient(ellipse ${mask.radius ?? 100}% ${mask.radius ?? 100}% at ${mask.x ?? 50}% ${mask.y ?? 0}%, black, transparent)`,
+    WebkitMaskImage: `radial-gradient(ellipse ${mask.radius ?? 100}% ${mask.radius ?? 100}% at ${mask.x ?? 50}% ${mask.y ?? 0}%, black, transparent)`,
   };
 
   return (
@@ -63,8 +63,8 @@ export function BackgroundEffects({
           className="absolute inset-0 transition-opacity duration-1000"
           style={{
             ...maskStyle,
-            background: `radial-gradient(ellipse 80% 60% at ${gradient.x}% ${gradient.y}%, ${gradient.colorStart}, ${gradient.colorEnd})`,
-            opacity: gradient.opacity / 100,
+            background: `radial-gradient(ellipse 80% 60% at ${gradient.x ?? 50}% ${gradient.y ?? 50}%, ${gradient.colorStart ?? "hsl(var(--primary))"}, ${gradient.colorEnd ?? "transparent"})`,
+            opacity: (gradient.opacity ?? 60) / 100,
           }}
         />
       )}
@@ -74,9 +74,9 @@ export function BackgroundEffects({
           className="absolute inset-0"
           style={{
             ...maskStyle,
-            backgroundImage: `radial-gradient(${dots.color} ${dots.size}px, transparent ${dots.size}px)`,
-            backgroundSize: `${dots.size * 16}px ${dots.size * 16}px`,
-            opacity: dots.opacity / 100,
+            backgroundImage: `radial-gradient(${dots.color ?? "hsl(var(--primary))"} ${dots.size ?? 1}px, transparent ${dots.size ?? 1}px)`,
+            backgroundSize: `${(dots.size ?? 1) * 16}px ${(dots.size ?? 1) * 16}px`,
+            opacity: (dots.opacity ?? 30) / 100,
           }}
         />
       )}
@@ -87,11 +87,11 @@ export function BackgroundEffects({
           style={{
             ...maskStyle,
             backgroundImage: `
-              linear-gradient(${grid.color} 1px, transparent 1px),
-              linear-gradient(90deg, ${grid.color} 1px, transparent 1px)
+              linear-gradient(${grid.color ?? "hsl(var(--muted-foreground))"} 1px, transparent 1px),
+              linear-gradient(90deg, ${grid.color ?? "hsl(var(--muted-foreground))"} 1px, transparent 1px)
             `,
-            backgroundSize: `${grid.width} ${grid.height}`,
-            opacity: grid.opacity / 100,
+            backgroundSize: `${grid.width ?? "40px"} ${grid.height ?? "40px"}`,
+            opacity: (grid.opacity ?? 20) / 100,
           }}
         />
       )}
@@ -102,13 +102,13 @@ export function BackgroundEffects({
           style={{
             ...maskStyle,
             backgroundImage: `repeating-linear-gradient(
-              ${lines.angle}deg,
+              ${lines.angle ?? -45}deg,
               transparent,
               transparent 10px,
-              ${lines.color} 10px,
-              ${lines.color} 11px
+              ${lines.color ?? "hsl(var(--muted-foreground))"} 10px,
+              ${lines.color ?? "hsl(var(--muted-foreground))"} 11px
             )`,
-            opacity: lines.opacity / 100,
+            opacity: (lines.opacity ?? 15) / 100,
           }}
         />
       )}
@@ -117,7 +117,7 @@ export function BackgroundEffects({
         <div
           className="absolute inset-0 bg-noise animate-subtle-drift"
           style={{
-            opacity: noise.opacity / 100,
+            opacity: (noise.opacity ?? 3) / 100,
           }}
         />
       )}
