@@ -1,7 +1,10 @@
 {
-  "name": "nextjs-boilerplate",
+  "name": "shahnazar-dot-me",
   "version": "0.1.0",
   "private": true,
+  "pnpm": {
+    "ignoredBuiltDependencies": ["sharp"]
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
