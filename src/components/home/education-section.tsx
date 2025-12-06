@@ -2,7 +2,7 @@
 
 import { siteConfig } from "@/config/site";
 import { RevealFx, StaggerChildren, StaggerItem } from "@/components/effects/reveal-fx";
-import { GraduationCap, BookOpen, BookMarked, Users, ExternalLink } from "lucide-react";
+import { GraduationCap, BookOpen, BookMarked, Users, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -95,14 +95,17 @@ export function EducationSection() {
                     "transition-all duration-300"
                   )}>
                     <div className="space-y-2 sm:space-y-3">
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-base sm:text-lg font-semibold text-foreground group-hover:text-foreground/90 transition-colors">
+                      <h3 className="text-base sm:text-lg font-semibold text-foreground transition-colors inline-flex items-center gap-2">
+                        <span className="relative">
                           {book.title}
-                        </h3>
+                          {book.url && (
+                            <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-foreground/40 transition-all duration-300 group-hover:w-full" />
+                          )}
+                        </span>
                         {book.url && (
-                          <ExternalLink className="w-4 h-4 text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors shrink-0" />
+                          <ArrowUpRight className="w-4 h-4 text-muted-foreground/40 group-hover:text-foreground/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
                         )}
-                      </div>
+                      </h3>
                       <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground/70">
                         <span>{book.publisher}</span>
                         <span className="text-muted-foreground/30">·</span>
@@ -136,15 +139,18 @@ export function EducationSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg",
+                  "group inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg",
                   "bg-muted/40 border border-border/30",
                   "text-xs sm:text-sm font-medium text-muted-foreground",
                   "hover:bg-muted/60 hover:text-foreground hover:border-border/50",
                   "transition-all duration-200"
                 )}
               >
-                <span>Google Scholar</span>
-                <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-60" />
+                <span className="relative">
+                  Google Scholar
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full" />
+                </span>
+                <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-50 transition-all duration-300 group-hover:opacity-80 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
           </RevealFx>
@@ -166,11 +172,14 @@ export function EducationSection() {
                     "cursor-pointer"
                   )}>
                     <div className="space-y-2.5 sm:space-y-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <p className="text-[13px] sm:text-base text-foreground/90 leading-relaxed font-medium group-hover:text-foreground transition-colors flex-1" dir="ltr">
-                          {pub.title}
+                      <div className="flex items-start gap-2">
+                        <p className="text-[13px] sm:text-base text-foreground/90 leading-relaxed font-medium group-hover:text-foreground transition-colors flex-1 relative" dir="ltr">
+                          <span className="relative">
+                            {pub.title}
+                            <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-foreground/30 transition-all duration-300 group-hover:w-full" />
+                          </span>
                         </p>
-                        <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground/40 group-hover:text-muted-foreground/70 shrink-0 mt-0.5 transition-colors" />
+                        <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground/30 group-hover:text-muted-foreground/60 shrink-0 mt-0.5 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
                       <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 text-[10px] sm:text-xs">
                         <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-muted/60 text-muted-foreground rounded-md font-medium">

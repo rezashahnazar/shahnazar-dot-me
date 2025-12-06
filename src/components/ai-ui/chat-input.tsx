@@ -1,8 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Link2, Calendar, Globe, ArrowUp } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAiChat } from "./ai-chat-provider";
 
@@ -20,14 +19,7 @@ type Props = {
     onKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement>;
     disabled: boolean;
   };
-  Utility: { icon: LucideIcon; size: string };
 };
-
-const UTILS = [
-  { icon: Link2, size: "!size-5" },
-  { icon: Calendar, size: "!size-5" },
-  { icon: Globe, size: "!size-5" },
-] as const;
 
 export function ChatInput({
   disclaimerText = "پاسخ هوش مصنوعی ممکن است اشتباه باشد.",
@@ -49,7 +41,7 @@ export function ChatInput({
     <div
       className={cn(
         "w-full sticky bottom-0 mx-auto",
-        "px-4 md:px-6 pb-2 md:pb-3 pt-0",
+        "px-5 sm:px-5 md:px-6 pb-2 md:pb-3 pt-0",
         className
       )}
     >
@@ -57,7 +49,7 @@ export function ChatInput({
         ref={formRef}
         onSubmit={handleSubmit}
         onClick={focusTextarea}
-        className="flex flex-col rounded-2xl bg-muted p-3 shadow-none cursor-text max-w-4xl mx-auto"
+        className="flex items-center gap-2 rounded-xl sm:rounded-2xl bg-muted px-3 py-2 shadow-none cursor-text max-w-4xl mx-auto"
       >
         <ChatTextarea
           value={input}
@@ -65,15 +57,12 @@ export function ChatInput({
           onKeyDown={handleKeyDown}
           disabled={isLoading}
         />
-        <div className="flex items-center justify-between mt-2 shadow-none">
-          <UtilityButtons />
-          <ActionButton
-            isLoading={isLoading}
-            stopButtonRef={stopButtonRef}
-            onStop={stop}
-            disabled={!input.trim()}
-          />
-        </div>
+        <ActionButton
+          isLoading={isLoading}
+          stopButtonRef={stopButtonRef}
+          onStop={stop}
+          disabled={!input.trim()}
+        />
       </form>
       <ChatDisclaimer text={disclaimerText} />
     </div>
@@ -87,51 +76,28 @@ function ChatTextarea({
   disabled,
 }: Props["TextArea"]) {
   return (
-    <div className="flex flex-col shadow-none">
-      <Textarea
-        value={value}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        autoComplete="off"
-        spellCheck="false"
-        placeholder="پیام خود را اینجا بنویسید..."
-        disabled={disabled}
-        rows={1}
-        enterKeyHint="enter"
-        className={cn(
-          "w-full bg-transparent min-h-[24px] text-[13px] leading-6",
-          "text-foreground placeholder:text-muted-foreground placeholder:text-[13px]",
-          "border-0 px-2 py-1 resize-none",
-          "focus-visible:ring-0 focus-visible:ring-offset-0 !shadow-none",
-          "transition-[height] duration-100 ease-out",
-          "scrollbar-w-2 scrollbar-track-transparent scrollbar-thumb-accent/50",
-          "hover:scrollbar-thumb-accent/70",
-          "[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent",
-          "[&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent/50",
-          "hover:[&::-webkit-scrollbar-thumb]:bg-accent/70",
-          "[scrollbar-width:thin] [scrollbar-color:hsl(var(--accent))_transparent]"
-        )}
-      />
-    </div>
-  );
-}
-
-function UtilityButtons() {
-  return (
-    <div className="flex items-center gap-2">
-      {UTILS.map(({ icon: Icon, size }, index) => (
-        <Button
-          key={index}
-          type="button"
-          variant="ghost"
-          size="icon"
-          disabled
-          className="h-7 w-7 rounded-lg hover:bg-accent !opacity-20"
-        >
-          <Icon className={cn(size, "text-muted-foreground")} />
-        </Button>
-      ))}
-    </div>
+    <Textarea
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+      autoComplete="off"
+      spellCheck="false"
+      placeholder="پیام خود را بنویسید..."
+      disabled={disabled}
+      rows={1}
+      enterKeyHint="enter"
+      className={cn(
+        "flex-1 bg-transparent min-h-[24px] max-h-[100px] sm:max-h-[120px]",
+        "text-[13px] leading-[20px]",
+        "text-foreground placeholder:text-muted-foreground/60",
+        "border-0 px-1 py-0.5 resize-none",
+        "focus-visible:ring-0 focus-visible:ring-offset-0 !shadow-none",
+        "transition-[height] duration-100 ease-out",
+        "[&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent",
+        "[&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent/50",
+        "[scrollbar-width:thin] [scrollbar-color:hsl(var(--accent))_transparent]"
+      )}
+    />
   );
 }
 
@@ -150,14 +116,14 @@ function ActionButton({
         size="icon"
         onClick={onStop}
         className={cn(
-          "h-7 w-7 rounded-lg",
+          "size-[30px] sm:size-7 shrink-0 rounded-lg",
           "bg-destructive/10 hover:bg-destructive/20",
           "text-destructive hover:text-destructive",
           "transition-colors duration-200",
           "ring-1 ring-destructive/40 hover:ring-destructive/60"
         )}
       >
-        <div className="h-[10px] w-[10px] bg-current rounded-[2px]" />
+        <div className="size-[11px] sm:size-2.5 bg-current rounded-[2px]" />
       </Button>
     );
   }
@@ -168,16 +134,16 @@ function ActionButton({
       variant="ghost"
       size="icon"
       disabled={disabled}
-      className="h-7 w-7 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-25 disabled:bg-accent"
+      className="size-[30px] sm:size-7 shrink-0 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-20 disabled:bg-muted-foreground/30"
     >
-      <ArrowUp className="h-[15px] w-[15px] text-primary-foreground" />
+      <ArrowUp className="size-[17px] sm:size-4 text-primary-foreground" strokeWidth={2.5} />
     </Button>
   );
 }
 
 function ChatDisclaimer({ text }: { text: string }) {
   return (
-    <div className="text-center relative bottom-0 left-0 right-0 pt-1">
+    <div className="text-center py-2 sm:py-1">
       <span className="text-[10px] text-muted-foreground/50">{text}</span>
     </div>
   );

@@ -6,6 +6,8 @@ export const siteConfig = {
   descriptionEn: "Cardiologist, MD | Software Engineer",
   url: "https://www.shahnazar.me",
   birthDate: {
+    day: 30,
+    dayFa: "۸",
     year: 1991,
     month: "October",
     monthFa: "آبان",

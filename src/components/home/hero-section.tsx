@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 import { RevealFx, StaggerChildren, StaggerItem } from "@/components/effects/reveal-fx";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Mail, ExternalLink, Github, Linkedin, GraduationCap } from "lucide-react";
+import { Mail, Github, Linkedin, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -56,7 +56,7 @@ export function HeroSection() {
         {/* Name Section */}
         <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
           <RevealFx delay={0.1} translateY={12}>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
               {siteConfig.name}
             </h1>
           </RevealFx>
@@ -146,12 +146,15 @@ export function HeroSection() {
                   "hover:bg-muted/50",
                   "font-medium text-sm",
                   "transition-all duration-300",
-                  "hover-lift"
+                  "hover-lift",
+                  "group relative"
                 )}
               >
-                <Github className="w-4 h-4 ml-2" />
-                <span className="hidden sm:inline">GitHub</span>
-                <ExternalLink className="w-3 h-3 mr-1 opacity-40" />
+                <Github className="w-4 h-4 ml-2 transition-transform group-hover:scale-110" />
+                <span className="hidden sm:inline relative">
+                  GitHub
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full" />
+                </span>
               </Button>
             </Link>
 
@@ -165,12 +168,15 @@ export function HeroSection() {
                   "hover:bg-muted/50",
                   "font-medium text-sm",
                   "transition-all duration-300",
-                  "hover-lift"
+                  "hover-lift",
+                  "group relative"
                 )}
               >
-                <Linkedin className="w-4 h-4 ml-2" />
-                <span className="hidden sm:inline">LinkedIn</span>
-                <ExternalLink className="w-3 h-3 mr-1 opacity-40" />
+                <Linkedin className="w-4 h-4 ml-2 transition-transform group-hover:scale-110" />
+                <span className="hidden sm:inline relative">
+                  LinkedIn
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full" />
+                </span>
               </Button>
             </Link>
 
@@ -184,12 +190,15 @@ export function HeroSection() {
                   "hover:bg-muted/50",
                   "font-medium text-sm",
                   "transition-all duration-300",
-                  "hover-lift"
+                  "hover-lift",
+                  "group relative"
                 )}
               >
-                <GraduationCap className="w-4 h-4 ml-2" />
-                <span className="hidden sm:inline">Scholar</span>
-                <ExternalLink className="w-3 h-3 mr-1 opacity-40" />
+                <GraduationCap className="w-4 h-4 ml-2 transition-transform group-hover:scale-110" />
+                <span className="hidden sm:inline relative">
+                  Scholar
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full" />
+                </span>
               </Button>
             </Link>
           </div>

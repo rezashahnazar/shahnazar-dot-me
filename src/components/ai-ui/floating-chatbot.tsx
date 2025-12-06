@@ -6,7 +6,7 @@ import { AiChatProvider } from "@/components/ai-ui/ai-chat-provider";
 import { MessageList } from "@/components/ai-ui/message-list";
 import { ChatInput } from "@/components/ai-ui/chat-input";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, X, Sparkles } from "lucide-react";
+import { Bot, X, Sparkles } from "lucide-react";
 import { Drawer } from "vaul";
 import { siteConfig } from "@/config/site";
 
@@ -25,7 +25,45 @@ function useIsMobile(breakpoint: number = 768) {
   return isMobile;
 }
 
-// Generate context from siteConfig
+function gregorianToJalali(gy: number, gm: number, gd: number): [number, number, number] {
+  const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+  let jy = (gy <= 1600) ? 0 : 979;
+  gy -= (gy <= 1600) ? 621 : 1600;
+  const gy2 = (gm > 2) ? (gy + 1) : gy;
+  let days = (365 * gy) + (Math.floor((gy2 + 3) / 4)) - (Math.floor((gy2 + 99) / 100)) 
+           + (Math.floor((gy2 + 399) / 400)) - 80 + gd + g_d_m[gm - 1];
+  jy += 33 * (Math.floor(days / 12053));
+  days %= 12053;
+  jy += 4 * (Math.floor(days / 1461));
+  days %= 1461;
+  jy += Math.floor((days - 1) / 365);
+  if (days > 365) days = (days - 1) % 365;
+  const jm = (days < 186) ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
+  const jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+  return [jy, jm, jd];
+}
+
+function formatJalaliDateTime(): string {
+  const now = new Date();
+  const [jy, jm, jd] = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+  
+  const jalaliMonths = [
+    "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+    "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
+  ];
+  const persianDays = ["یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه"];
+  const toPersianNum = (n: number) => n.toString().replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[parseInt(d)]);
+  
+  const dayName = persianDays[now.getDay()];
+  const date = toPersianNum(jd);
+  const month = jalaliMonths[jm - 1];
+  const year = toPersianNum(jy);
+  const hours = toPersianNum(now.getHours());
+  const minutes = toPersianNum(now.getMinutes()).padStart(2, "۰");
+  
+  return `${dayName}، ${date} ${month} ${year}، ساعت ${hours}:${minutes}`;
+}
+
 function generateChatContext(): string {
   const { name, nameEn, title, description, skills, experiences, education, publications, books, teaching, birthDate } = siteConfig;
   
@@ -50,11 +88,15 @@ function generateChatContext(): string {
   const teachingList = teaching.map(t => 
     `- ${t.role} در ${t.institution} (${t.period})`
   ).join("\n");
+  
+  const currentDateTime = formatJalaliDateTime();
 
   return `
 اطلاعات درباره ${name} (${nameEn}):
 
-تاریخ تولد: ${birthDate.monthFa} ${birthDate.yearFa} (${birthDate.month} ${birthDate.year})
+زمان فعلی: ${currentDateTime}
+
+تاریخ تولد: ${birthDate.dayFa} ${birthDate.monthFa} ${birthDate.yearFa} (${birthDate.month} ${birthDate.day}, ${birthDate.year})
 عنوان: ${title}
 توضیحات: ${description}
 
@@ -80,6 +122,8 @@ ${teachingList}
 - LinkedIn: ${siteConfig.social.linkedin}
 - Google Scholar: ${siteConfig.social.googleScholar}
 - Email: ${siteConfig.social.email}
+
+نکته مهم: همیشه از تقویم جلالی (شمسی) برای نمایش تاریخ‌ها استفاده کن. تاریخ تولد در تقویم شمسی ۸ آبان ۱۳۷۰ است.
 `.trim();
 }
 
@@ -117,22 +161,56 @@ export function FloatingChatbot() {
 
       {/* Floating Action Button */}
       {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className={cn(
-            "fixed z-50",
-            "bottom-6 left-6",
-            "size-14 rounded-full",
-            "bg-primary hover:bg-primary/90",
-            "shadow-lg hover:shadow-xl",
-            "transition-all duration-300",
-            "hover:scale-105 active:scale-95",
-            "group"
-          )}
-        >
-          <MessageCircle className="size-6 text-primary-foreground group-hover:hidden" />
-          <Sparkles className="size-6 text-primary-foreground hidden group-hover:block" />
-        </Button>
+        <div className="fixed z-50 bottom-6 right-6 group">
+          {/* Ambient glow */}
+          <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-150 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+          
+          {/* Outer ring with subtle animation */}
+          <div className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-primary/30 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          <Button
+            onClick={() => setIsOpen(true)}
+            className={cn(
+              "relative",
+              "size-14 rounded-full",
+              "bg-gradient-to-br from-primary via-primary to-primary/80",
+              "shadow-[0_8px_32px_-4px] shadow-primary/30",
+              "group-hover:shadow-[0_12px_40px_-4px] group-hover:shadow-primary/50",
+              "border border-white/10",
+              "transition-all duration-500 ease-out",
+              "group-hover:scale-110 active:scale-95",
+              "overflow-hidden"
+            )}
+          >
+            {/* Inner shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/15 rounded-full" />
+            
+            {/* Animated background shimmer on hover */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+            
+            {/* Single Bot icon */}
+            <Bot className={cn(
+              "size-6 text-primary-foreground relative z-10",
+              "transition-transform duration-300 ease-out",
+              "group-hover:scale-110"
+            )} />
+          </Button>
+          
+          {/* Tooltip */}
+          <div className={cn(
+            "absolute -top-12 left-1/2 -translate-x-1/2",
+            "px-3 py-1.5 rounded-lg",
+            "bg-foreground/95 text-background backdrop-blur-sm",
+            "text-xs font-medium whitespace-nowrap",
+            "opacity-0 scale-90 translate-y-2",
+            "group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0",
+            "transition-all duration-300 delay-150 pointer-events-none",
+            "shadow-xl"
+          )}>
+            گفتگو با دستیار هوشمند
+            <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px border-[6px] border-transparent border-t-foreground/95" />
+          </div>
+        </div>
       )}
     </>
   );
@@ -147,15 +225,42 @@ function DesktopChatPanel({
   setIsOpen: (open: boolean) => void;
   pageContext: string;
 }) {
-  const handleWheel = React.useCallback((e: React.WheelEvent) => {
-    e.stopPropagation();
+  const panelRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const preventScrollPropagation = (e: WheelEvent) => {
+      const target = e.target as HTMLElement;
+      const scrollableParent = target.closest("[data-scroll-container]") || panel;
+      const isScrollable = scrollableParent.scrollHeight > scrollableParent.clientHeight;
+      
+      if (!isScrollable) {
+        e.preventDefault();
+        return;
+      }
+
+      const { scrollTop, scrollHeight, clientHeight } = scrollableParent;
+      const isAtTop = scrollTop === 0;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+      const isScrollingUp = e.deltaY < 0;
+      const isScrollingDown = e.deltaY > 0;
+
+      if ((isAtTop && isScrollingUp) || (isAtBottom && isScrollingDown)) {
+        e.preventDefault();
+      }
+    };
+
+    panel.addEventListener("wheel", preventScrollPropagation, { passive: false });
+    return () => panel.removeEventListener("wheel", preventScrollPropagation);
   }, []);
 
   return (
     <div
-      onWheel={handleWheel}
+      ref={panelRef}
       className={cn(
-        "fixed z-50 bottom-6 left-6",
+        "fixed z-50 bottom-6 right-6",
         "w-[420px] h-[600px] max-h-[80vh]",
         "bg-background border border-border/50",
         "rounded-2xl shadow-2xl",
@@ -192,7 +297,7 @@ function DesktopChatPanel({
       <AiChatProvider api="/api/chat" pageContent={pageContext}>
         <MessageList className="flex-1" />
         <ChatInput 
-          disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشند."
+          disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشد."
           className=""
         />
       </AiChatProvider>
@@ -270,7 +375,7 @@ function MobileChatSheet({
           <AiChatProvider api="/api/chat" pageContent={pageContext}>
             <MessageList className="flex-1" />
             <ChatInput 
-              disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشند."
+              disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشد."
             />
           </AiChatProvider>
         </Drawer.Content>

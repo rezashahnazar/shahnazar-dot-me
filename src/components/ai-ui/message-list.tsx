@@ -157,7 +157,10 @@ function ScrollContainer({
       )}
       scrollHideDelay={SCROLL.delay}
     >
-      <ScrollArea.Viewport className="h-full w-full max-w-4xl mx-auto overscroll-contain">
+      <ScrollArea.Viewport 
+        data-scroll-container
+        className="h-full w-full max-w-4xl mx-auto overscroll-contain"
+      >
         {children}
       </ScrollArea.Viewport>
 

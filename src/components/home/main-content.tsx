@@ -18,7 +18,7 @@ import {
   BookOpen,
   ChevronLeft,
   Users,
-  ExternalLink,
+  ArrowUpRight,
   Medal,
   Brain,
   HeartPulse,
@@ -255,7 +255,7 @@ export function MainContent() {
                             <span className="relative bg-gradient-to-r from-foreground to-foreground/90 bg-clip-text text-transparent transition-colors group-hover:from-primary group-hover:to-primary/90">
                               {link.text}
                             </span>
-                            <ExternalLink className="mr-1 h-3 w-3 opacity-50 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-70" />
+                            <ArrowUpRight className="mr-1 h-3 w-3 opacity-40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-70" />
                           </Button>
                         </Link>
                       ))}
