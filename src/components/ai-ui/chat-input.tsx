@@ -40,8 +40,8 @@ export function ChatInput({
   return (
     <div
       className={cn(
-        "w-full sticky bottom-0 mx-auto",
-        "px-5 sm:px-5 md:px-6 pb-2 md:pb-3 pt-0",
+        "w-full mx-auto shrink-0",
+        "px-5 sm:px-5 md:px-6 pb-2 md:pb-3 pt-2",
         className
       )}
     >

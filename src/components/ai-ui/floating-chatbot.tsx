@@ -314,15 +314,47 @@ function MobileChatSheet({
   setIsOpen: (open: boolean) => void;
   pageContext: string;
 }) {
+  const [viewportHeight, setViewportHeight] = React.useState<number | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const updateHeight = () => {
+      if (window.visualViewport) {
+        setViewportHeight(window.visualViewport.height);
+      }
+    };
+
+    updateHeight();
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", updateHeight);
+      window.visualViewport.addEventListener("scroll", updateHeight);
+    }
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", updateHeight);
+        window.visualViewport.removeEventListener("scroll", updateHeight);
+      }
+    };
+  }, [isOpen]);
+
+  const dynamicHeight = viewportHeight 
+    ? `${Math.min(viewportHeight * 0.92, viewportHeight - 20)}px` 
+    : "85dvh";
+
   return (
     <Drawer.Root
       open={isOpen}
       onOpenChange={setIsOpen}
       direction="bottom"
       dismissible
+      handleOnly
+      noBodyStyles
     >
       <Drawer.Portal>
-        {/* Overlay */}
         <Drawer.Overlay
           className={cn(
             "fixed inset-0 bg-black/60 z-[100]",
@@ -331,27 +363,29 @@ function MobileChatSheet({
           )}
         />
 
-        {/* Content */}
         <Drawer.Content
+          ref={contentRef}
+          style={{ 
+            height: dynamicHeight,
+            maxHeight: dynamicHeight,
+          }}
           className={cn(
             "fixed bottom-0 left-0 right-0 z-[200]",
-            "h-[85dvh] flex flex-col",
+            "flex flex-col",
             "bg-background rounded-t-[20px]",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-            "duration-300"
+            "duration-300",
+            "will-change-[height]"
           )}
         >
-          {/* Handle */}
-          <div className="flex justify-center pt-3 pb-2">
-            <div className="w-12 h-1.5 rounded-full bg-muted-foreground/20" />
+          <div className="flex justify-center pt-3 pb-2 shrink-0">
+            <Drawer.Handle className="w-12 h-1.5 rounded-full bg-muted-foreground/20" />
           </div>
 
-          {/* Title for accessibility */}
           <Drawer.Title className="sr-only">دستیار هوشمند</Drawer.Title>
 
-          {/* Header */}
-          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50">
+          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 shrink-0">
             <div className="flex items-center gap-3">
               <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center">
                 <Sparkles className="size-5 text-primary" />
@@ -371,9 +405,8 @@ function MobileChatSheet({
             </Button>
           </div>
 
-          {/* Chat Content */}
           <AiChatProvider api="/api/chat" pageContent={pageContext}>
-            <MessageList className="flex-1" />
+            <MessageList className="flex-1 min-h-0" />
             <ChatInput 
               disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشد."
             />
