@@ -5,6 +5,12 @@ export const siteConfig = {
   description: "متخصص قلب و عروق | مهندس نرم‌افزار",
   descriptionEn: "Cardiologist, MD | Software Engineer",
   url: "https://www.shahnazar.me",
+  birthDate: {
+    year: 1991,
+    month: "October",
+    monthFa: "آبان",
+    yearFa: "۱۳۷۰",
+  },
 
   location: {
     city: "تهران",

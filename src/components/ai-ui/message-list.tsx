@@ -155,10 +155,9 @@ function ScrollContainer({
         "overflow-hidden touch-none select-none",
         className
       )}
-      data-overscroll-behavior="contain"
       scrollHideDelay={SCROLL.delay}
     >
-      <ScrollArea.Viewport className="h-full w-full max-w-4xl mx-auto">
+      <ScrollArea.Viewport className="h-full w-full max-w-4xl mx-auto overscroll-contain">
         {children}
       </ScrollArea.Viewport>
 

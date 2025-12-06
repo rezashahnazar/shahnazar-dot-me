@@ -27,7 +27,7 @@ function useIsMobile(breakpoint: number = 768) {
 
 // Generate context from siteConfig
 function generateChatContext(): string {
-  const { name, nameEn, title, description, skills, experiences, education, publications, books, teaching } = siteConfig;
+  const { name, nameEn, title, description, skills, experiences, education, publications, books, teaching, birthDate } = siteConfig;
   
   const skillsList = skills.map(s => s.name).join("، ");
   
@@ -54,6 +54,7 @@ function generateChatContext(): string {
   return `
 اطلاعات درباره ${name} (${nameEn}):
 
+تاریخ تولد: ${birthDate.monthFa} ${birthDate.yearFa} (${birthDate.month} ${birthDate.year})
 عنوان: ${title}
 توضیحات: ${description}
 
@@ -146,8 +147,13 @@ function DesktopChatPanel({
   setIsOpen: (open: boolean) => void;
   pageContext: string;
 }) {
+  const handleWheel = React.useCallback((e: React.WheelEvent) => {
+    e.stopPropagation();
+  }, []);
+
   return (
     <div
+      onWheel={handleWheel}
       className={cn(
         "fixed z-50 bottom-6 left-6",
         "w-[420px] h-[600px] max-h-[80vh]",
@@ -155,6 +161,7 @@ function DesktopChatPanel({
         "rounded-2xl shadow-2xl",
         "flex flex-col overflow-hidden",
         "transition-all duration-300 ease-out",
+        "overscroll-contain",
         isOpen
           ? "opacity-100 translate-y-0 scale-100"
           : "opacity-0 translate-y-4 scale-95 pointer-events-none"
