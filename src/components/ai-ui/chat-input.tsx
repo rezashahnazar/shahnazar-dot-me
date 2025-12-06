@@ -41,7 +41,8 @@ export function ChatInput({
     <div
       className={cn(
         "w-full mx-auto shrink-0",
-        "px-5 sm:px-5 md:px-6 pb-2 md:pb-3 pt-2",
+        "px-5 sm:px-5 md:px-6 pt-2",
+        "pb-[max(0.5rem,env(safe-area-inset-bottom))] md:pb-3",
         className
       )}
     >

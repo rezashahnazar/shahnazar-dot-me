@@ -7,7 +7,6 @@ import { MessageList } from "@/components/ai-ui/message-list";
 import { ChatInput } from "@/components/ai-ui/chat-input";
 import { Button } from "@/components/ui/button";
 import { Bot, X, Sparkles } from "lucide-react";
-import { Drawer } from "vaul";
 import { siteConfig } from "@/config/site";
 
 // Hook to detect mobile viewport
@@ -314,106 +313,84 @@ function MobileChatSheet({
   setIsOpen: (open: boolean) => void;
   pageContext: string;
 }) {
-  const [viewportHeight, setViewportHeight] = React.useState<number | null>(null);
-  const contentRef = React.useRef<HTMLDivElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    if (!isOpen) return;
-
-    const updateHeight = () => {
-      if (window.visualViewport) {
-        setViewportHeight(window.visualViewport.height);
-      }
-    };
-
-    updateHeight();
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", updateHeight);
-      window.visualViewport.addEventListener("scroll", updateHeight);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
     }
-
     return () => {
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", updateHeight);
-        window.visualViewport.removeEventListener("scroll", updateHeight);
-      }
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
     };
   }, [isOpen]);
 
-  const dynamicHeight = viewportHeight 
-    ? `${Math.min(viewportHeight * 0.92, viewportHeight - 20)}px` 
-    : "85dvh";
+  if (!isOpen) return null;
 
   return (
-    <Drawer.Root
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      direction="bottom"
-      dismissible
-      handleOnly
-      noBodyStyles
-    >
-      <Drawer.Portal>
-        <Drawer.Overlay
-          className={cn(
-            "fixed inset-0 bg-black/60 z-[100]",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out",
-            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
-          )}
-        />
+    <>
+      <div
+        className="fixed inset-0 bg-black/60 z-[100] animate-in fade-in-0 duration-200"
+        onClick={() => setIsOpen(false)}
+      />
 
-        <Drawer.Content
-          ref={contentRef}
-          style={{ 
-            height: dynamicHeight,
-            maxHeight: dynamicHeight,
-          }}
-          className={cn(
-            "fixed bottom-0 left-0 right-0 z-[200]",
-            "flex flex-col",
-            "bg-background rounded-t-[20px]",
-            "data-[state=open]:animate-in data-[state=closed]:animate-out",
-            "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-            "duration-300",
-            "will-change-[height]"
-          )}
-        >
-          <div className="flex justify-center pt-3 pb-2 shrink-0">
-            <Drawer.Handle className="w-12 h-1.5 rounded-full bg-muted-foreground/20" />
-          </div>
+      <div
+        ref={containerRef}
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-[200]",
+          "h-[100dvh] pt-[env(safe-area-inset-top)]",
+          "flex flex-col",
+          "bg-background",
+          "animate-in slide-in-from-bottom duration-300"
+        )}
+      >
+        <div className="flex justify-center pt-3 pb-2 shrink-0">
+          <button 
+            onClick={() => setIsOpen(false)}
+            className="w-12 h-1.5 rounded-full bg-muted-foreground/20 cursor-pointer hover:bg-muted-foreground/30 transition-colors"
+          />
+        </div>
 
-          <Drawer.Title className="sr-only">دستیار هوشمند</Drawer.Title>
-
-          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <Sparkles className="size-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-base font-medium text-foreground">دستیار هوشمند</h3>
-                <p className="text-xs text-muted-foreground">درباره من بپرسید</p>
-              </div>
+        <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <Sparkles className="size-5 text-primary" />
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(false)}
-              className="size-9 rounded-full hover:bg-muted"
-            >
-              <X className="size-5" />
-            </Button>
+            <div>
+              <h3 className="text-base font-medium text-foreground">دستیار هوشمند</h3>
+              <p className="text-xs text-muted-foreground">درباره من بپرسید</p>
+            </div>
           </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsOpen(false)}
+            className="size-9 rounded-full hover:bg-muted"
+          >
+            <X className="size-5" />
+          </Button>
+        </div>
 
-          <AiChatProvider api="/api/chat" pageContent={pageContext}>
-            <MessageList className="flex-1 min-h-0" />
-            <ChatInput 
-              disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشد."
-            />
-          </AiChatProvider>
-        </Drawer.Content>
-      </Drawer.Portal>
-    </Drawer.Root>
+        <AiChatProvider api="/api/chat" pageContent={pageContext}>
+          <MessageList className="flex-1 min-h-0 overflow-y-auto" />
+          <ChatInput 
+            disclaimerText="پاسخ‌های هوش مصنوعی ممکن است غیر دقیق باشد."
+          />
+        </AiChatProvider>
+      </div>
+    </>
   );
 }
 
