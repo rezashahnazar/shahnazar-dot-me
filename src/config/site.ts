@@ -131,12 +131,12 @@ export const siteConfig = {
       skills: ["Leadership", "Business Analytics", "Full-Stack Development", "Technical PM", "Project Management"],
     },
     {
-      title: "مدیر مدرسه تابستانی المپیاد ملی زیست‌شناسی",
+      title: "مدیر دوره تابستان المپیاد ملی زیست‌شناسی",
       company: "باشگاه دانش‌پژوهان جوان",
       period: "۱۳۸۹ - ۱۳۹۱",
       duration: "۲ سال و ۱ ماه",
       location: "تهران",
-      description: "مدیریت و برگزاری مدرسه تابستانی برای دانش‌آموزان برگزیده المپیاد زیست‌شناسی",
+      description: "مدیریت و برگزاری دوره تابستان دانش‌آموزان برگزیده المپیاد زیست‌شناسی",
       skills: ["Educational Leadership", "Event Management", "Team Leadership", "Project Management"],
     },
     {
@@ -149,12 +149,12 @@ export const siteConfig = {
       skills: ["Strategic Planning", "Event Planning", "Project Coordination", "Project Management"],
     },
     {
-      title: "مدیر علمی اردوی آماده‌سازی المپیاد جهانی زیست‌شناسی",
+      title: "مدیر علمی دوره کشوری آماده‌سازی المپیاد جهانی زیست‌شناسی",
       company: "باشگاه دانش‌پژوهان جوان",
       period: "۱۳۸۸ - ۱۳۹۰",
       duration: "۱ سال و ۱۰ ماه",
       location: "تهران",
-      description: "مدیریت علمی اردوی آماده‌سازی تیم ملی برای المپیاد جهانی زیست‌شناسی",
+      description: "مدیریت علمی دوره کشوری آماده‌سازی تیم ملی برای المپیاد جهانی زیست‌شناسی",
       skills: ["Team Management", "Biology", "Teaching", "Team Leadership"],
     },
     {
@@ -324,7 +324,7 @@ export const siteConfig = {
     totalDuration: "۳ سال و ۳ ماه",
     roles: [
       {
-        title: "مدیر مدرسه تابستانی المپیاد ملی زیست‌شناسی",
+        title: "مدیر دوره تابستان المپیاد ملی زیست‌شناسی",
         period: "۱۳۸۹ - ۱۳۹۱",
         duration: "۲ سال و ۱ ماه",
       },
@@ -347,13 +347,13 @@ export const siteConfig = {
         skills: ["Questionnaire Design", "Scientific Communications", "Scientific Writing", "Project Coordination", "Project Management"],
       },
       {
-        title: "مدیر علمی اردوی آماده‌سازی المپیاد جهانی زیست‌شناسی",
+        title: "مدیر علمی دوره کشوری آماده‌سازی المپیاد جهانی زیست‌شناسی",
         period: "۱۳۸۸ - ۱۳۹۰",
         duration: "۱ سال و ۱۰ ماه",
         skills: ["Educational Leadership", "Team Management", "Biology", "Teaching", "Event Management", "Team Leadership", "Project Management"],
       },
       {
-        title: "هماهنگ‌کننده آزمایشگاه مدرسه تابستانی المپیاد ملی",
+        title: "هماهنگ‌کننده آزمایشگاه دوره تابستان المپیاد ملی",
         period: "۱۳۸۸",
         duration: "۴ ماه",
         skills: ["Molecular Genetics", "Cell Biology", "Evolutionary Biology", "Biochemistry", "Laboratory Skills", "Biology", "Biostatistics", "Team Leadership", "Project Management"],

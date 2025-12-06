@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { SkipLink } from "@/components/layout/skip-link";
 import { BackgroundEffects } from "@/components/effects/background-effects";
 import { JsonLd } from "@/components/seo/json-ld";
+import { FloatingChatbot } from "@/components/ai-ui/floating-chatbot";
 import { siteConfig } from "@/config/site";
 import type { Viewport } from "next";
 import type { Metadata } from "next";
@@ -157,6 +158,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <FloatingChatbot />
         </CustomThemeProvider>
       </body>
     </html>

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "pnpm": {
-    "ignoredBuiltDependencies": ["sharp"]
+    "ignoredBuiltDependencies": [
+      "sharp"
+    ]
   },
   "scripts": {
     "dev": "next dev --turbopack",
@@ -35,6 +37,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns-jalali": "4.1.0-0",
+    "dotenv": "^17.2.3",
     "framer-motion": "^12.0.5",
     "gpt-tokenizer": "^2.8.1",
     "katex": "^0.16.21",
