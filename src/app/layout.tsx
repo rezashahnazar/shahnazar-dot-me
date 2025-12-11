@@ -12,6 +12,9 @@ import { siteConfig } from "@/config/site";
 import type { Viewport } from "next";
 import type { Metadata } from "next";
 
+const siteUrl = new URL(siteConfig.url);
+const ogImageUrl = new URL("/opengraph-image", siteUrl).toString();
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
@@ -24,7 +27,14 @@ export const metadata: Metadata = {
   ],
   creator: siteConfig.nameEn,
   publisher: siteConfig.nameEn,
+  applicationName: siteConfig.title,
   category: "Personal Website",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   keywords: [
     siteConfig.name,
     siteConfig.nameEn,
@@ -68,7 +78,7 @@ export const metadata: Metadata = {
     lastName: "Shahnazar",
     images: [
       {
-        url: `${siteConfig.url}/opengraph-image`,
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: `${siteConfig.nameEn} - Cardiologist & Software Engineer`,
@@ -80,7 +90,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.nameEn} - Cardiologist, MD & Software Engineer`,
     description: `Cardiologist and software engineer focused on AI-enabled solutions for healthcare and digital platforms.`,
-    images: [`${siteConfig.url}/opengraph-image`],
+    images: [ogImageUrl],
     creator: "@rezashahnazar",
   },
   robots: {

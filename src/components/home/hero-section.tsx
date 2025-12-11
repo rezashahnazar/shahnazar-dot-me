@@ -42,7 +42,7 @@ export function HeroSection() {
               <Avatar className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 bg-muted/50">
                 <AvatarImage 
                   src={profileImage}
-                  alt={siteConfig.name} 
+                  alt={`${siteConfig.name} - ${siteConfig.nameEn}`} 
                   className="object-cover grayscale-[0.1] contrast-[1.02]" 
                 />
                 <AvatarFallback className="text-2xl sm:text-3xl font-semibold bg-muted text-muted-foreground">
@@ -58,6 +58,7 @@ export function HeroSection() {
           <RevealFx delay={0.1} translateY={12}>
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
               {siteConfig.name}
+              <span className="sr-only">{` (${siteConfig.nameEn})`}</span>
             </h1>
           </RevealFx>
 

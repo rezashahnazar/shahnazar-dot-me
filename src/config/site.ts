@@ -65,7 +65,7 @@ export const siteConfig = {
     {
       label: "کتاب منتشرشده",
       value: "۵",
-      description: "ژنتیک کلاسیک و آمار زیستی",
+      description: "ژنتیک کلاسیک ، مبانی آمار زیستی و ...",
     },
     {
       label: "سال تدریس",

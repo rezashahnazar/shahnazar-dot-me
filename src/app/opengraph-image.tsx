@@ -7,13 +7,13 @@ export const size = {
 };
 export const contentType = "image/png";
 export const runtime = "edge";
-export const alt = "Next.js RTL Boilerplate";
+export const alt = "Reza Shahnazar | رضا شاه‌نظر";
 
 export default async function Image() {
   return createOpenGraphImage({
     logo: <Logo size={80} />,
-    title: "Shahnazar.Me",
-    line1: "وبسایت شخصی",
-    line2: "رضا شاه‌نظر",
+    title: "Reza Shahnazar",
+    line1: "رضا شاه‌نظر",
+    line2: "متخصص قلب و عروق | مهندس نرم‌افزار",
   });
 }
