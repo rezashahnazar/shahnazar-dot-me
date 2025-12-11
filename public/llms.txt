@@ -1,0 +1,147 @@
+# Reza Shahnazar | رضا شاه‌نظر
+
+> Personal website: https://www.shahnazar.me/
+
+## Identity
+
+- Canonical name (English): Reza Shahnazar
+- Canonical name (Persian/Farsi): رضا شاه‌نظر
+- Full legal name: Reza Shahnazar Nezhad Khalesi (رضا شاه نظر نژاد خالصی)
+- Born: October 30, 1991 (8 Aban 1370 in Persian calendar)
+- Location: Tehran, Iran
+
+## Summary
+
+Reza Shahnazar is a board-certified cardiologist (MD) and software engineer with 17+ years of professional experience spanning medicine and technology. He is focused on building data-driven and AI-enabled solutions for healthcare and large-scale digital platforms. Gold medalist of the Iran National Biology Olympiad.
+
+## Current Position
+
+Software Engineer at Digikala (Iran's largest e-commerce platform), working in the Shopping team within the Technology division. Previously held roles as Product Marketing Manager, Data Science Lead, and Senior Data Scientist at the same company.
+
+## Education
+
+1. Cardiology Fellowship (Board Certified)
+   - Tehran University of Medical Sciences, Tehran Heart Center
+   - 2018-2022 (1397-1401 in Persian calendar)
+   - Specialization: Cardiovascular Medicine, Clinical Research
+
+2. Doctor of Medicine (MD)
+   - Tehran University of Medical Sciences
+   - 2009-2016 (1388-1395 in Persian calendar)
+
+3. Gold Medal - Iran National Biology Olympiad
+   - Young Scholars Club (باشگاه دانش‌پژوهان جوان)
+   - 2008 (1387 in Persian calendar)
+
+## Professional Experience
+
+### Technology & Product (Digikala)
+- Software Engineer (Nov 2024 - Present): Java, Spring Boot, PHP, software architecture
+- Product Marketing Manager (Jun 2024 - Nov 2024): Leadership, business analytics, AI product development
+- Product Marketing Lead (Oct 2023 - Jun 2024): Full-stack development, technical PM
+- Data Science Lead (Jan 2023 - Oct 2023): Statistical analysis, data visualization, product development
+- Senior Data Scientist (Jun 2022 - Jan 2023): Machine learning, analytics
+
+### Healthcare Technology
+- Co-founder & CTO at ZiDoctor (Sep 2021 - May 2022): Online medical platform, Flask, Django, Docker, React.js
+
+### Education Technology
+- Founder & Director at sClass College (May 2018 - May 2021): Online biology olympiad education platform
+
+### Biology Olympiad Leadership (Young Scholars Club)
+- Summer Camp Director for National Biology Olympiad (2010-2012)
+- Member of National Biology Olympiad Committee (2009-2012)
+- Scientific Director for IBO Preparation Camp (2009-2011)
+- National Biology Olympiad Exam Coordinator (2009-2011)
+- Biochemistry Instructor (2009-2012)
+
+## Scientific Publications
+
+1. "Cranial nerve palsy prevalence and associated factors in patients with malignant otitis externa"
+   - Laryngoscope Investigative Otolaryngology, 2023
+   - https://onlinelibrary.wiley.com/doi/full/10.1002/lio2.1035
+
+2. "Association between Nontraditional Risk Factors and Calculated 10-Year Risk of Atherosclerotic Cardiovascular Disease in a Large General Population: Based on the Pars Cohort Study"
+   - Journal of Tehran University Heart Center, 2023
+   - https://pmc.ncbi.nlm.nih.gov/articles/PMC10225028/
+
+3. "MaxSpliZer: A Tool To Predict Effects Of LDLR Splice Variants Based On The Maximum Entropy Model"
+   - Arteriosclerosis, Thrombosis, and Vascular Biology (AHA), 2022
+   - https://www.ahajournals.org/doi/abs/10.1161/atvb.42.suppl_1.431
+
+4. "MaxSpliZer: a Tool to Predict Effects of Splice Variants Based on the Maximum Entropy Model"
+   - Authorea Preprints, 2022
+   - https://www.authorea.com/users/519960/articles/586392
+
+## Books (in Persian)
+
+1. "Classical Genetics" (ژنتیک کلاسیک)
+   - Publisher: Fatemi Publications
+   - 5 editions, 5000+ copies sold
+   - Topics: Genetics, Biostatistics, Probability Theory
+
+2. "Fundamentals of Biostatistics" (مبانی آمار زیستی)
+   - Publisher: Young Scholars Publications
+   - Topics: Cell Biology, Biochemistry, Evolutionary Biology, Ecology
+
+3. "Iran Biology Olympiad - Stage 1" (المپیادهای زیست‌شناسی ایران - مرحله اول)
+   - Publisher: Young Scholars Publications, 2023
+
+4. "Iran Biology Olympiad - Stage 2" (المپیادهای زیست‌شناسی ایران - مرحله دوم)
+   - Publisher: Young Scholars Publications, 2023
+
+5. "International Biology Olympiad" (المپیادهای جهانی زیست‌شناسی)
+   - Publisher: Young Scholars Publications, 2023
+
+## Teaching Experience (12+ years)
+
+- Biostatistics & Genetics Instructor at SAMPAD (National Organization for Development of Exceptional Talents), 2009-2020
+- Biology Olympiad Coordinator at Golden Club (باشگاه طلایی‌ها), 2015-2020
+- Biostatistics & Genetics Instructor at Allameh Tabatabaei Educational Complex, 2013-2018
+- Scientific Director of Biology Olympiad at Farzanegan 2 High School, 2013-2017
+- Biostatistics & Genetics Instructor at Farzanegan 1 High School, 2014-2017
+- Scientific Director of Biology Olympiad at Allameh Helli High School, 2013-2015
+
+## Areas of Expertise
+
+### Medicine
+- Cardiovascular Medicine
+- Clinical Research
+- Internal Medicine
+- Emergency Medicine
+
+### Technology
+- Software Engineering (Java, Spring Boot, PHP, Python, React.js)
+- Data Science & Machine Learning
+- AI Product Development
+- Full-Stack Development
+- System Administration
+- Software Architecture
+
+### Other
+- Product Management
+- Business Analytics
+- Educational Leadership
+- Scientific Writing
+- Biostatistics
+- Genetics (Molecular, Population, Classical)
+
+## Research Affiliations
+
+- Tehran Heart Center
+- Cardiovascular Disease Research Institute
+- Tehran University of Medical Sciences
+
+## Online Profiles
+
+- Website: https://www.shahnazar.me/
+- GitHub: https://github.com/rezashahnazar
+- LinkedIn: https://www.linkedin.com/in/reza-shahnazar/
+- Google Scholar: https://scholar.google.com/citations?user=Q6jSlrYAAAAJ
+- Medium: https://medium.com/@reza.shahnazar
+- YouTube: https://www.youtube.com/channel/UCxxOP0KMS9Q-HcNX1hJxoOQ
+- Threads: https://www.threads.com/@rezashahnazar
+
+## Contact
+
+- Email: reza.shahnazar@gmail.com
